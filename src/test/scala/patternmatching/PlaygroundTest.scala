@@ -1,6 +1,6 @@
 package patternmatching
 
-import org.scalatest.{FlatSpec, Matchers, WordSpec}
+import org.scalatest.{Matchers, WordSpec}
 
 class PlaygroundTest extends WordSpec with Matchers {
 
@@ -56,10 +56,7 @@ class PlaygroundTest extends WordSpec with Matchers {
       val myNb = Option.apply(5)
 
       // WHEN
-//      val result = Playground.multiplyByTwoIfExists(myNb)
       Playground.goToTheBroomRoom()
-      // THEN
-//      result shouldEqual 10
     }
   }
 }
