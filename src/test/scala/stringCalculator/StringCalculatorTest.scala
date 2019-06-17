@@ -47,5 +47,19 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // THEN
       result shouldEqual 8
     }
+
+    "return the sum of numbers when there are new lines between numbers in the string" in {
+      val result = StringCalculator.add("2\n1")
+
+      // THEN
+      result shouldEqual 3
+    }
+
+    "return the sum of numbers when there are new lines and commas between numbers in the string" in {
+      val result = StringCalculator.add("2\n1,5")
+
+      // THEN
+      result shouldEqual 8
+    }
   }
 }
