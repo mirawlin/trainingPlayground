@@ -61,5 +61,19 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // THEN
       result shouldEqual 8
     }
+
+    "return the sum of numbers after changing the delimiter to ; on a new line" in {
+      val result = StringCalculator.add("//;\n2;1")
+
+      // THEN
+      result shouldEqual 3
+    }
+
+    "return the sum of numbers after changing the delimiter to 'z' on a new line" in {
+      val result = StringCalculator.add("//z\n2z1z3")
+
+      // THEN
+      result shouldEqual 6
+    }
   }
 }
