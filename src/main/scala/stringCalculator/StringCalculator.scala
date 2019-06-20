@@ -3,14 +3,24 @@ package stringCalculator
 object StringCalculator {
   def add(numbers: String): Int = {
     if (!numbers.isEmpty) {
-      if (numbers.startsWith("//")) {
-        val delimiter = numbers.charAt(2)
-        numbers
-          .substring(4)
-          .split(delimiter)
-          .map(_.toInt)
-          .sum }
-      else numbers.split("[\n,]").map(_.toInt).sum }
+      val (nbs, delimiter) = if (numbers.startsWith("//"))
+        (numbers.substring(4), s"[\n${numbers.charAt(2)}]")
+      else (numbers, "[\n,]")
+
+      nbs.split(delimiter)
+        .map(convertStringToInt)
+        .sum
+    }
     else 0
   }
+
+  private def convertStringToInt(s: String): Int = {
+    val num = s.toInt
+    if (num < 0)
+      throw new NumberNotAllowedException(s"negatives not allowed - $num")
+    else num
+  }
 }
+
+
+class NumberNotAllowedException(message: String) extends Exception(message)
