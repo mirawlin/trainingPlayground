@@ -75,5 +75,29 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // THEN
       result shouldEqual 6
     }
+    "return the sum of numbers after changing the delimiter to 'z' and new line on a new line" in {
+      val result = StringCalculator.add("//z\n2z1z3\n1")
+
+      // THEN
+      result shouldEqual 7
+    }
+
+    "throw an error if a negative number is passed and the negative number" in {
+      val result = intercept[NumberNotAllowedException] {
+        StringCalculator.add("2,-3")
+      }
+
+      // THEN
+      result.getMessage shouldEqual "negatives not allowed - -3"
+    }
+
+    "throw an error if a negative number is passed to a custom delimiter string and the negative number" in {
+      val result = intercept[NumberNotAllowedException] {
+        StringCalculator.add("//z\n2z1z-33")
+      }
+
+      // THEN
+      result.getMessage shouldEqual "negatives not allowed - -33"
+    }
   }
 }
