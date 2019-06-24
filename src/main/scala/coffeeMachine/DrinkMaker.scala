@@ -1,0 +1,7 @@
+package coffeeMachine
+
+
+object DrinkMaker {
+
+
+}
