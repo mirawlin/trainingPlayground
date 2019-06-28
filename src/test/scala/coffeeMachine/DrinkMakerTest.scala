@@ -1,5 +1,6 @@
 package coffeeMachine
 
+import coffeeMachine.model._
 import org.scalatest.{Matchers, WordSpec}
 
 class DrinkMakerTest extends WordSpec with Matchers {
@@ -7,7 +8,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
   "the function orders" should {
     "return a Tea if the first letter in the string is T and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.orders("T::")
+      val result = DrinkMaker.makeDrink(Order("T::", 0))
 
       //THEN
       result.isInstanceOf[Tea] shouldBe true
@@ -20,7 +21,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
 
     "return a Coffee if the first letter in the string is C and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.orders("C::")
+      val result = DrinkMaker.makeDrink(Order("C::",0))
 
       //THEN
       result.isInstanceOf[Coffee] shouldBe true
@@ -29,7 +30,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
 
     "return a Chocolate if the first letter in the string is H and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.orders("H::")
+      val result = DrinkMaker.makeDrink(Order("H::",0))
 
       //THEN
       result.isInstanceOf[Chocolate] shouldBe true
@@ -37,7 +38,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
 
     "return the message received if it starts with an M" in {
       //WHEN
-      val result = DrinkMaker.orders("M:message")
+      val result = DrinkMaker.makeDrink(Order("M:message",0))
 
       //THEN
       result.isInstanceOf[Comment] shouldBe true
@@ -51,7 +52,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
 
     "return a Tea if the first letter in the string is T and te sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.orders("T:1:0")
+      val result = DrinkMaker.makeDrink(Order("T:1:0",0))
 
       //THEN
       result match {
@@ -61,7 +62,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
     }
     "return a Coffee if the first letter in the string is C and the sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.orders("C:2:0")
+      val result = DrinkMaker.makeDrink(Order("C:2:0",0))
 
       //THEN
       result match {
@@ -71,7 +72,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
     }
     "return a Hot Chocolate if the first letter in the string is H and the sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.orders("H:2:0")
+      val result = DrinkMaker.makeDrink(Order("H:2:0",0))
 
       //THEN
       result match {

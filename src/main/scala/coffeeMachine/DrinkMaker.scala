@@ -1,32 +1,27 @@
 package coffeeMachine
 
-trait Drink
+import coffeeMachine.model._
 
-case class Coffee(sugar: Int, stick: Boolean = false) extends Drink
 
-case class Tea(sugar: Int, stick: Boolean = false) extends Drink
-
-case class Chocolate(sugar: Int, stick: Boolean = false) extends Drink
-
-case class Comment(msg: String) extends Drink
-
+// Factory design pattern
 object DrinkMaker {
 
-  def orders(drink: String): Drink = {
-    if (drink.startsWith("T")) {
-      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(drink)
+  def makeDrink(order: Order): Drink = {
+
+    if (order.order.startsWith("T")) {
+      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(order.order)
       Tea(sugars, stick)
     }
-    else if (drink.startsWith("C")) {
-      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(drink)
+    else if (order.order.startsWith("C")) {
+      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(order.order)
       Coffee(sugars, stick)
     }
-    else if (drink.startsWith("H")) {
-      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(drink)
+    else if (order.order.startsWith("H")) {
+      val (sugars: Int, stick: Boolean) = getSugarsAndSticks(order.order)
       Chocolate(sugars, stick)
     }
     else {
-      val sequence = drink.split(":")
+      val sequence = order.order.split(":")
       val message = if (sequence.length > 1)
         sequence(1)
       else null
