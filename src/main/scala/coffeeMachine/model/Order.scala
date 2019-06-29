@@ -1,5 +1,5 @@
 package coffeeMachine.model
 
-case class Order(order: String, amount: Float) {
+case class Order(order: String, amount: BigDecimal) {
 
 }

@@ -1,14 +1,13 @@
-package coffeeMachine
+package coffeeMachine.model
 
-import coffeeMachine.model._
 import org.scalatest.{Matchers, WordSpec}
 
-class DrinkMakerTest extends WordSpec with Matchers {
+class DrinkTest extends WordSpec with Matchers {
 
   "the function orders" should {
     "return a Tea if the first letter in the string is T and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("T::", 0.5))
+      val result = Drink.getDrink("T::")
 
       //THEN
       result.isInstanceOf[Tea] shouldBe true
@@ -19,68 +18,26 @@ class DrinkMakerTest extends WordSpec with Matchers {
       }
     }
 
-    "return an error message when the money amount is too low" in {
-      //WHEN
-      val result = DrinkMaker.makeDrink(Order("T::", 0.3))
-
-      //THEN
-      // SAME SAME
-      result match {
-        case Comment(msg) =>
-          msg shouldEqual "your order is missing 0.1"
-          succeed
-        case _ => fail("WRONG TYPE")
-      }
-    }
-
     "return a Coffee if the first letter in the string is C and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("C::",0.7))
+      val result = Drink.getDrink("C::")
 
       //THEN
       result.isInstanceOf[Coffee] shouldBe true
     }
 
-    "return an error message when the money amount is too low for coffee" in {
-      //WHEN
-      val result = DrinkMaker.makeDrink(Order("C::", 0.3))
-
-      //THEN
-      // SAME SAME
-      result match {
-        case Comment(msg) =>
-          msg shouldEqual "your order is missing 0.3"
-          succeed
-        case _ => fail("WRONG TYPE")
-      }
-    }
-
     "return a Chocolate if the first letter in the string is H and no stick if no sugars" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("H::",0.5))
+      val result = Drink.getDrink("H::")
 
       //THEN
       result.isInstanceOf[Chocolate] shouldBe true
     }
 
-    "return an error message when the money amount is too low for chocolate" in {
-      //WHEN
-      val result = DrinkMaker.makeDrink(Order("H::", 0.3))
-
-      //THEN
-      // SAME SAME
-      result match {
-        case Comment(msg) =>
-          msg shouldEqual "your order is missing 0.2"
-          succeed
-        case _ => fail("WRONG TYPE")
-      }
-    }
-
 
     "return the message received if it starts with an M" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("M:message",0))
+      val result = Drink.getDrink("M:message")
 
       //THEN
       result.isInstanceOf[Comment] shouldBe true
@@ -94,7 +51,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
 
     "return a Tea if the first letter in the string is T and te sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("T:1:0",0.4))
+      val result = Drink.getDrink("T:1:0")
 
       //THEN
       result match {
@@ -104,7 +61,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
     }
     "return a Coffee if the first letter in the string is C and the sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("C:2:0",0.6))
+      val result = Drink.getDrink("C:2:0")
 
       //THEN
       result match {
@@ -114,7 +71,7 @@ class DrinkMakerTest extends WordSpec with Matchers {
     }
     "return a Hot Chocolate if the first letter in the string is H and the sugars associated to it" in {
       //WHEN
-      val result = DrinkMaker.makeDrink(Order("H:2:0",0.5))
+      val result = Drink.getDrink("H:2:0")
 
       //THEN
       result match {
@@ -124,4 +81,5 @@ class DrinkMakerTest extends WordSpec with Matchers {
     }
 
   }
+
 }
