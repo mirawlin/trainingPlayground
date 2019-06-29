@@ -1,6 +1,4 @@
 package marsRovers
 
 class MarsRover {
-
-
 }
