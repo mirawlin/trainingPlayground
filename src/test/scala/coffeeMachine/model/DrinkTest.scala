@@ -13,7 +13,7 @@ class DrinkTest extends WordSpec with Matchers {
       result.isInstanceOf[Tea] shouldBe true
       // SAME SAME
       result match {
-        case Tea(_, false) => succeed
+        case Tea(_, false, false) => succeed
         case _ => fail("WRONG TYPE")
       }
     }
@@ -34,6 +34,13 @@ class DrinkTest extends WordSpec with Matchers {
       result.isInstanceOf[Chocolate] shouldBe true
     }
 
+    "return a Orange juce if the first letter in the string is O" in {
+      //WHEN
+      val result = Drink.getDrink("O::")
+
+      //THEN
+      result.isInstanceOf[Orange] shouldBe true
+    }
 
     "return the message received if it starts with an M" in {
       //WHEN
@@ -48,14 +55,13 @@ class DrinkTest extends WordSpec with Matchers {
       }
     }
 
-
     "return a Tea if the first letter in the string is T and te sugars associated to it" in {
       //WHEN
       val result = Drink.getDrink("T:1:0")
 
       //THEN
       result match {
-        case Tea(1, true) => succeed
+        case Tea(1, true, false) => succeed
         case _ => fail("WRONG TYPE")
       }
     }
@@ -65,7 +71,7 @@ class DrinkTest extends WordSpec with Matchers {
 
       //THEN
       result match {
-        case Coffee(2, true) => succeed
+        case Coffee(2, true, false) => succeed
         case _ => fail("WRONG TYPE")
       }
     }
@@ -75,11 +81,43 @@ class DrinkTest extends WordSpec with Matchers {
 
       //THEN
       result match {
-        case Chocolate(2, true) => succeed
+        case Chocolate(2, true, false) => succeed
         case _ => fail("WRONG TYPE")
       }
     }
 
+    "return an extra hot Tea if the first letter in the string is T and the 2nd letter is h" in {
+      //WHEN
+      val result = Drink.getDrink("Th::")
+
+      //THEN
+      result match {
+        case Tea(0, false, true) => succeed
+        case _ => fail("WRONG TYPE")
+      }
+    }
+
+    "return an extra hot Chocolate if the first letter in the string is H and the 2nd letter is h" in {
+      //WHEN
+      val result = Drink.getDrink("Hh::")
+
+      //THEN
+      result match {
+        case Chocolate(0, false, true) => succeed
+        case _ => fail("WRONG TYPE")
+      }
+    }
+
+    "return an extra hot Coffee if the first letter in the string is C and the 2nd letter is h" in {
+      //WHEN
+      val result = Drink.getDrink("Ch::")
+
+      //THEN
+      result match {
+        case Coffee(0, false, true) => succeed
+        case _ => fail("WRONG TYPE")
+      }
+    }
   }
 
 }

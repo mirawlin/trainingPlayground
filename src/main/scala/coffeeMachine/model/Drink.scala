@@ -2,13 +2,15 @@ package coffeeMachine.model
 
 trait Drink
 
-case class Coffee(sugar: Int, stick: Boolean = false) extends Drink
+case class Coffee(sugar: Int, stick: Boolean = false, extraHot: Boolean = false) extends Drink
 
-case class Tea(sugar: Int, stick: Boolean = false) extends Drink
+case class Tea(sugar: Int, stick: Boolean = false, extraHot: Boolean = false) extends Drink
 
-case class Chocolate(sugar: Int, stick: Boolean = false) extends Drink
+case class Chocolate(sugar: Int, stick: Boolean = false, extraHot: Boolean = false) extends Drink
 
 case class Comment(msg: String) extends Drink
+
+case class Orange() extends Drink
 
 object Drink {
 
@@ -25,6 +27,17 @@ object Drink {
       case "H" =>
         val (sugars: Int, stick: Boolean) = getSugarsAndSticks(orderType)
         Chocolate(sugars, stick)
+      case "Th" =>
+        val (sugars: Int, stick: Boolean) = getSugarsAndSticks(orderType)
+        Tea(sugars, stick, extraHot = true)
+      case "Ch" =>
+        val (sugars: Int, stick: Boolean) = getSugarsAndSticks(orderType)
+        Coffee(sugars, stick, extraHot = true)
+      case "Hh" =>
+        val (sugars: Int, stick: Boolean) = getSugarsAndSticks(orderType)
+        Chocolate(sugars, stick, extraHot = true)
+      case "O" =>
+        Orange()
       case _ =>
         val message = if (orderType.length > 1)
           orderType(1)
