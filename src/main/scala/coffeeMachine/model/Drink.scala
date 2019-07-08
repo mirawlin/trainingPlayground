@@ -15,8 +15,6 @@ case class Orange() extends Drink
 object Drink {
 
   def getDrink(order: String): Drink = {
-
-    val temp = 0
     val orderType = order.split(":")
     orderType(0) match {
       case "T" =>
